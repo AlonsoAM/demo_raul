@@ -1,0 +1,60 @@
+{
+  "marca": {
+    "nombre": "Agrícola Andrea",
+    "subtitulo": "Acceso"
+  },
+  "ajustes": {
+    "idioma": {
+      "etiqueta": "Idioma",
+      "es": "Español",
+      "en": "English"
+    },
+    "tema": {
+      "etiqueta": "Tema",
+      "claro": "Claro",
+      "oscuro": "Oscuro",
+      "sistema": "Sistema"
+    }
+  },
+  "autenticacion": {
+    "ingreso": {
+      "titulo": "Ingresa a tu cuenta",
+      "subtitulo": "Usa tu correo y contraseña, o elige un proveedor.",
+      "separador": "o"
+    },
+    "campos": {
+      "correo": "Correo electrónico",
+      "correoEjemplo": "nombre@empresa.com",
+      "contrasena": "Contraseña",
+      "mostrarContrasena": "Mostrar contraseña",
+      "ocultarContrasena": "Ocultar contraseña"
+    },
+    "acciones": {
+      "ingresar": "Ingresar",
+      "ingresando": "Ingresando…",
+      "google": "Continuar con Google",
+      "github": "Continuar con GitHub",
+      "microsoft": "Continuar con Microsoft",
+      "cerrarSesion": "Cerrar sesión"
+    },
+    "errores": {
+      "correoInvalido": "Ingrese un correo electrónico válido",
+      "contrasenaVacia": "La contraseña es obligatoria",
+      "contrasenaCorta": "La contraseña debe tener al menos 8 caracteres",
+      "credenciales": "Correo o contraseña incorrectos",
+      "generico": "No se pudo completar el ingreso. Inténtalo de nuevo."
+    },
+    "bienvenida": {
+      "saludo": "Hola, {{nombre}}",
+      "sesionIniciada": "Sesión iniciada",
+      "nombre": "Nombre",
+      "nota": "Sesión de demostración: al recargar la página deberás ingresar de nuevo.",
+      "via": {
+        "correo": "Cuenta de demostración",
+        "google": "Ingreso con Google",
+        "github": "Ingreso con GitHub",
+        "microsoft": "Ingreso con Microsoft"
+      }
+    }
+  }
+}
