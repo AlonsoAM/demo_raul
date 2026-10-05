@@ -12,12 +12,12 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground hover:bg-primary/80",
         // Acción principal: fill primario, sombra 3D que se "hunde" 4px al presionar.
         principal:
-          "w-full bg-primary font-extrabold text-on-primary shadow-button hover:bg-primary-hover active:not-aria-disabled:translate-y-1 active:not-aria-disabled:shadow-none",
+          "w-full bg-primary text-[17px] font-extrabold text-on-primary shadow-button aria-disabled:not-aria-busy:opacity-55 hover:bg-primary-hover active:not-aria-disabled:translate-y-1 active:not-aria-disabled:shadow-none",
         // Ingreso con proveedor: fondo de tarjeta, borde 2px y sombra inferior de 3px.
         proveedor:
-          "w-full border-2 border-border bg-card text-card-foreground shadow-[0_3px_0_var(--border)] hover:bg-surface-1 active:not-aria-disabled:translate-y-[3px] active:not-aria-disabled:shadow-none",
+          "w-full border-2 border-border bg-card font-extrabold text-card-foreground aria-disabled:not-aria-busy:opacity-55 shadow-[0_3px_0_var(--border)] hover:bg-surface-1 active:not-aria-disabled:translate-y-[3px] active:not-aria-disabled:shadow-none",
         contorno:
-          "border-2 border-border bg-background text-foreground hover:bg-muted aria-expanded:bg-muted",
+          "border-2 border-border-strong bg-transparent text-[17px] font-extrabold text-ink hover:bg-surface-2 aria-expanded:bg-muted",
         outline:
           "border-border bg-background shadow-xs hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
         secondary:
@@ -51,7 +51,7 @@ const buttonVariants = cva(
         size: "default",
         className: "h-[52px] gap-3 px-4 [&_svg:not([class*='size-'])]:size-5",
       },
-      { variant: "contorno", size: "default", className: "h-[52px] px-4" },
+      { variant: "contorno", size: "default", className: "h-14 px-4" },
     ],
     defaultVariants: {
       variant: "default",

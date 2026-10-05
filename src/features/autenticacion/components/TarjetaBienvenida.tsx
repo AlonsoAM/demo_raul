@@ -34,7 +34,7 @@ export function TarjetaBienvenida({ usuario, onCerrarSesion }: TarjetaBienvenida
 
   return (
     <TarjetaAcceso aria-labelledby="titulo-bienvenida">
-      <span className="mb-6 inline-flex h-8 items-center gap-2 rounded-pill bg-[color-mix(in_srgb,var(--primary)_14%,transparent)] px-3 text-sm font-extrabold text-primary-text">
+      <span className="mb-6 inline-flex h-8 items-center gap-2 rounded-pill bg-[color-mix(in_srgb,var(--primary)_14%,transparent)] px-3 text-sm leading-normal font-extrabold text-primary-text">
         {ICONO_VIA[via]}
         <span>{t(`autenticacion.bienvenida.via.${via}`)}</span>
       </span>
@@ -50,7 +50,7 @@ export function TarjetaBienvenida({ usuario, onCerrarSesion }: TarjetaBienvenida
           id="titulo-bienvenida"
           ref={titulo}
           tabIndex={-1}
-          className="min-w-0 break-words text-2xl font-extrabold text-ink"
+          className="min-w-0 break-words text-[28px] leading-[1.15] font-extrabold tracking-[-0.01em] text-ink outline-none"
         >
           {nombre
             ? t('autenticacion.bienvenida.saludo', { nombre })
@@ -71,7 +71,7 @@ export function TarjetaBienvenida({ usuario, onCerrarSesion }: TarjetaBienvenida
         </div>
       </dl>
 
-      <p className="mb-6 flex gap-3 rounded-md border border-border bg-canvas px-4 py-3 text-sm text-ink-muted">
+      <p className="mb-6 flex gap-3 rounded-md border border-border bg-(--bg-page) px-4 py-3 text-sm leading-normal text-ink-muted">
         <Info className="mt-0.5 size-[18px] flex-none" aria-hidden="true" />
         <span>{t('autenticacion.bienvenida.nota')}</span>
       </p>

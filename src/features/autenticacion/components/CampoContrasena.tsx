@@ -52,7 +52,7 @@ export function CampoContrasena({
               : "autenticacion.campos.mostrarContrasena",
           )}
           aria-pressed={visible}
-          className="absolute inset-y-0 right-0 flex w-12 items-center justify-center rounded-r-xl text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="absolute inset-y-0.5 right-0.5 flex w-12 items-center justify-center rounded-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {visible ? (
             <EyeOff aria-hidden="true" className="size-[21px]" />
