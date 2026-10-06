@@ -4,6 +4,9 @@ import type { Proveedor, UsuarioSesion } from '../types/autenticacion.types'
 // Frontera con el «backend» que aún no existe (A1): al llegar el backend real
 // se reemplaza este archivo y el resto de la feature no cambia.
 // Los datos de abajo son ejemplos públicos de demostración, no secretos (A5).
+// La simulación solo existe con `VITE_AUTH_SIMULADA=true`: la comparación estática
+// con `import.meta.env` hace que Vite elimine las credenciales del bundle si el flag
+// está apagado (A1).
 
 export const CUENTA_DEMO = {
   correo: 'demo@agricolaandrea.com',
@@ -26,12 +29,21 @@ export class CredencialesInvalidasError extends Error {
   }
 }
 
+/** Con la simulación apagada no hay autenticación real aún: falla de forma explícita (A14). */
+export class AutenticacionNoConfiguradaError extends Error {
+  constructor() {
+    super('Autenticación real no configurada')
+    this.name = 'AutenticacionNoConfiguradaError'
+  }
+}
+
 function esperar(ms: number): Promise<void> {
   return new Promise((resolver) => setTimeout(resolver, ms))
 }
 
 /** Ingreso con correo y contraseña: correo sin distinguir mayúsculas, contraseña exacta. */
 export async function ingresarConCorreo(datos: DatosIngreso): Promise<UsuarioSesion> {
+  if (import.meta.env.VITE_AUTH_SIMULADA !== 'true') throw new AutenticacionNoConfiguradaError()
   await esperar(LATENCIA_SIMULADA_MS)
   const correoValido = datos.correo.trim().toLowerCase() === CUENTA_DEMO.correo
   const contrasenaValida = datos.contrasena === CUENTA_DEMO.contrasena
@@ -43,6 +55,7 @@ export async function ingresarConCorreo(datos: DatosIngreso): Promise<UsuarioSes
 
 /** Ingreso con proveedor externo: siempre exitoso con la identidad de ejemplo (RN-9). */
 export async function ingresarConProveedor(proveedor: Proveedor): Promise<UsuarioSesion> {
+  if (import.meta.env.VITE_AUTH_SIMULADA !== 'true') throw new AutenticacionNoConfiguradaError()
   await esperar(LATENCIA_SIMULADA_MS)
   const identidad = IDENTIDADES_PROVEEDOR[proveedor]
   return { nombre: identidad.nombre, correo: identidad.correo, via: proveedor }

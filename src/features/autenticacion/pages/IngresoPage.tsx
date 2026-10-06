@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TarjetaAcceso } from '@/components/shared/TarjetaAcceso'
 import { BotonProveedor } from '../components/BotonProveedor'
@@ -11,11 +12,17 @@ const PROVEEDORES: readonly Proveedor[] = ['google', 'github', 'microsoft']
 export function IngresoPage() {
   const { t } = useTranslation()
   const { pendiente, errorAutenticacion, ingresarConCorreo, ingresarConProveedor } = useIngreso()
+  const titulo = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    titulo.current?.focus()
+  }, [])
 
   return (
     <TarjetaAcceso aria-labelledby="titulo-ingreso">
       <h1
         id="titulo-ingreso"
+        ref={titulo}
         tabIndex={-1}
         className="mb-1 text-[28px] leading-[1.15] font-extrabold tracking-tight wrap-anywhere outline-none"
       >

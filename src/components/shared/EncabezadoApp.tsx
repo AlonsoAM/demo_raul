@@ -5,7 +5,7 @@ import { SelectorTema } from '@/components/shared/SelectorTema'
 
 /**
  * Encabezado de la app (AF-6): marca a la izquierda; selectores de idioma y tema
- * a la derecha, visibles en ingreso y bienvenida. El nombre se oculta bajo 480px (A14).
+ * a la derecha, visibles en ingreso y bienvenida. El nombre se oculta bajo el breakpoint sm (A14).
  */
 export function EncabezadoApp() {
   const { t } = useTranslation()
@@ -19,7 +19,7 @@ export function EncabezadoApp() {
         >
           <Sprout className="size-6" />
         </span>
-        <span className="hidden whitespace-nowrap text-lg font-extrabold min-[480px]:block">
+        <span className="hidden whitespace-nowrap text-lg font-extrabold sm:block">
           {t('marca.nombre')}
           <small className="block text-[13px] font-bold leading-[1.1] text-ink-muted">
             {t('marca.subtitulo')}

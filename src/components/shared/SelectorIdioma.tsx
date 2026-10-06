@@ -30,7 +30,7 @@ export function SelectorIdioma() {
             aria-label={etiqueta}
             title={etiqueta}
             onClick={() => elegir(codigo)}
-            className={`inline-flex h-11 min-w-11 cursor-pointer items-center justify-center rounded-pill px-3 text-sm font-extrabold transition-colors motion-reduce:transition-none ${
+            className={`inline-flex h-14 w-14 cursor-pointer items-center justify-center rounded-pill text-sm font-extrabold transition-colors motion-reduce:transition-none ${
               activo
                 ? 'bg-primary text-on-primary'
                 : 'bg-transparent text-ink-muted hover:bg-surface-2 hover:text-ink'

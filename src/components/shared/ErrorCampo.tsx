@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react"
 import { CircleAlert } from "lucide-react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 /**
  * Aviso de error bajo un campo. El `id` se enlaza con `aria-describedby` del campo.

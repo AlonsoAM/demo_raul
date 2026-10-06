@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import { LoaderCircle } from "lucide-react"
 import { Slot } from "radix-ui"
 
@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/80",
+        default: "bg-primary text-primary-foreground hover:bg-primary-hover",
         // Acción principal: fill primario, sombra 3D que se "hunde" 4px al presionar.
         principal:
           "w-full bg-primary text-[17px] font-extrabold text-on-primary shadow-button aria-disabled:not-aria-busy:opacity-55 hover:bg-primary-hover active:not-aria-disabled:translate-y-1 active:not-aria-disabled:shadow-none",
@@ -25,8 +25,8 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:outline-destructive",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-destructive/10 text-red-text hover:bg-destructive/15 focus-visible:outline-destructive",
+        link: "text-primary-text underline-offset-4 hover:underline",
       },
       size: {
         default:

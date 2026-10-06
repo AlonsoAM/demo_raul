@@ -27,6 +27,11 @@ export function CampoContrasena({
   const idGenerado = useId()
   const idCampo = id ?? idGenerado
   const idError = `${idCampo}-error`
+  const etiquetaVisibilidad = t(
+    visible
+      ? "autenticacion.campos.ocultarContrasena"
+      : "autenticacion.campos.mostrarContrasena",
+  )
 
   return (
     <div>
@@ -46,11 +51,8 @@ export function CampoContrasena({
         <button
           type="button"
           onClick={() => setVisible((v) => !v)}
-          aria-label={t(
-            visible
-              ? "autenticacion.campos.ocultarContrasena"
-              : "autenticacion.campos.mostrarContrasena",
-          )}
+          aria-label={etiquetaVisibilidad}
+          title={etiquetaVisibilidad}
           aria-pressed={visible}
           className="absolute inset-y-0.5 right-0.5 flex w-12 items-center justify-center rounded-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >

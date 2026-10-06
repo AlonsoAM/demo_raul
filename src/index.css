@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 
 /* ------------------------------------------------------------------
-   Tokens del DESIGN.md (perfil vanilla JS + CSS) — modo claro
+   Tokens del DESIGN.md (perfil React + Tailwind) — modo claro
    ------------------------------------------------------------------ */
 :root {
   /* Capa de MARCA — solo fills */

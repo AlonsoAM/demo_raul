@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
@@ -30,6 +30,7 @@ export function FormularioIngreso({
     register,
     handleSubmit,
     clearErrors,
+    setFocus,
     formState: { errors },
   } = useForm<DatosIngreso>({
     resolver: zodResolver(ingresoSchema),
@@ -45,8 +46,25 @@ export function FormularioIngreso({
     if (pendiente !== null && pendiente !== 'correo') clearErrors()
   }, [pendiente, clearErrors])
 
+  // El aviso de error se oculta al volver a editar un campo y reaparece en el siguiente
+  // fallo: el estado se reinicia al empezar CUALQUIER ingreso (correo o proveedor), para
+  // que un error nuevo nunca quede silenciado (A14).
+  const [avisoDescartado, setAvisoDescartado] = useState(false)
+  const [pendienteAnterior, setPendienteAnterior] = useState(pendiente)
+  if (pendiente !== pendienteAnterior) {
+    setPendienteAnterior(pendiente)
+    if (pendiente !== null) setAvisoDescartado(false)
+  }
+  const descartarAviso = () => setAvisoDescartado(true)
+
+  // Tras un rechazo de credenciales el foco vuelve a la contraseña (teclado y lectores).
+  useEffect(() => {
+    if (errorAutenticacion === 'autenticacion.errores.credenciales') setFocus('contrasena')
+  }, [errorAutenticacion, setFocus])
+
   const alEnviar = handleSubmit((datos) => {
     if (bloqueado) return
+    setAvisoDescartado(false)
     onEnviar(datos)
   })
 
@@ -81,7 +99,7 @@ export function FormularioIngreso({
           disabled={bloqueado}
           aria-invalid={errorCorreo ? true : undefined}
           aria-describedby={errorCorreo ? 'error-correo' : undefined}
-          {...register('correo')}
+          {...register('correo', { onChange: descartarAviso })}
         />
         <ErrorCampo id="error-correo">{errorCorreo}</ErrorCampo>
       </div>
@@ -91,11 +109,11 @@ export function FormularioIngreso({
           id="contrasena"
           disabled={bloqueado}
           error={errorContrasena}
-          {...register('contrasena')}
+          {...register('contrasena', { onChange: descartarAviso })}
         />
       </div>
 
-      {errorAutenticacion && (
+      {errorAutenticacion && !avisoDescartado && (
         <AvisoCredenciales mensaje={t(errorAutenticacion)} />
       )}
 

@@ -36,7 +36,7 @@ export function SelectorTema() {
             aria-label={etiqueta}
             title={etiqueta}
             onClick={() => elegir(tema)}
-            className={`inline-flex size-11 cursor-pointer items-center justify-center rounded-pill transition-colors motion-reduce:transition-none ${
+            className={`inline-flex size-14 cursor-pointer items-center justify-center rounded-pill transition-colors motion-reduce:transition-none ${
               activo
                 ? 'bg-primary text-on-primary'
                 : 'bg-transparent text-ink-muted hover:bg-surface-2 hover:text-ink'

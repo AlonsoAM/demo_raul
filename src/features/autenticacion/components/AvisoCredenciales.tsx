@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react"
 import { CircleAlert } from "lucide-react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 interface AvisoCredencialesProps
   extends Omit<ComponentProps<"div">, "children"> {
@@ -18,7 +18,7 @@ export function AvisoCredenciales({
     <div
       role="alert"
       className={cn(
-        "mb-4 flex items-start gap-3 rounded-md border border-red-text bg-[color-mix(in_srgb,var(--red-text)_14%,transparent)] px-4 py-3 text-red-text",
+        "mb-4 flex items-start gap-3 rounded-md border border-red-text bg-[color-mix(in_srgb,var(--accent-red)_14%,transparent)] px-4 py-3 text-red-text",
         className,
       )}
       {...props}
