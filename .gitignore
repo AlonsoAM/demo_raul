@@ -12,9 +12,10 @@ dist
 dist-ssr
 *.local
 
-# Secretos y variables de entorno (Const. A1)
-.env
-.env.*
+# Variables de entorno locales (Const. A1). `.env` y `.env.example` se versionan
+# porque solo llevan flags públicos; los secretos van en `.env.local` (ignorado).
+.env.local
+.env.*.local
 
 # Reportes de pruebas y cobertura
 playwright-report/

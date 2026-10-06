@@ -5,6 +5,8 @@ const URL_BASE = `http://localhost:${PUERTO}`
 
 export default defineConfig({
   testDir: './e2e',
+  // A19: 60 s por el slowMo de 250 ms (local) y la latencia simulada de 1,2 s.
+  timeout: 60_000,
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   reporter: process.env.CI ? 'github' : 'list',
