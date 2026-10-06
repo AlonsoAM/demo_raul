@@ -1,0 +1,60 @@
+{
+  "marca": {
+    "nombre": "Agrícola Andrea",
+    "subtitulo": "Sign in"
+  },
+  "ajustes": {
+    "idioma": {
+      "etiqueta": "Language",
+      "es": "Español",
+      "en": "English"
+    },
+    "tema": {
+      "etiqueta": "Theme",
+      "claro": "Light",
+      "oscuro": "Dark",
+      "sistema": "System"
+    }
+  },
+  "autenticacion": {
+    "ingreso": {
+      "titulo": "Sign in to your account",
+      "subtitulo": "Use your email and password, or pick a provider.",
+      "separador": "or"
+    },
+    "campos": {
+      "correo": "Email address",
+      "correoEjemplo": "name@company.com",
+      "contrasena": "Password",
+      "mostrarContrasena": "Show password",
+      "ocultarContrasena": "Hide password"
+    },
+    "acciones": {
+      "ingresar": "Sign in",
+      "ingresando": "Signing in…",
+      "google": "Continue with Google",
+      "github": "Continue with GitHub",
+      "microsoft": "Continue with Microsoft",
+      "cerrarSesion": "Sign out"
+    },
+    "errores": {
+      "correoInvalido": "Enter a valid email address",
+      "contrasenaVacia": "Password is required",
+      "contrasenaCorta": "Password must be at least 8 characters long",
+      "credenciales": "Incorrect email or password",
+      "generico": "We couldn't complete the sign-in. Please try again."
+    },
+    "bienvenida": {
+      "saludo": "Hello, {{nombre}}",
+      "sesionIniciada": "Signed in",
+      "nombre": "Name",
+      "nota": "Demo session: you will need to sign in again when the page reloads.",
+      "via": {
+        "correo": "Demo account",
+        "google": "Signed in with Google",
+        "github": "Signed in with GitHub",
+        "microsoft": "Signed in with Microsoft"
+      }
+    }
+  }
+}
