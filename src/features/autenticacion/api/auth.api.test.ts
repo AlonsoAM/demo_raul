@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
+  AutenticacionNoConfiguradaError,
   CUENTA_DEMO,
   CredencialesInvalidasError,
   IDENTIDADES_PROVEEDOR,
@@ -124,5 +125,47 @@ describe('auth.api — ingresarConProveedor (H2-E1, H2-E2, H2-E6)', () => {
 
   it('las tres identidades coinciden con IDENTIDADES_PROVEEDOR', () => {
     expect(Object.keys(IDENTIDADES_PROVEEDOR).sort()).toEqual(['github', 'google', 'microsoft'])
+  })
+})
+
+describe('auth.api — flag VITE_AUTH_SIMULADA', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs()
+  })
+
+  it('con el flag en "true" la cuenta demo ingresa', async () => {
+    vi.stubEnv('VITE_AUTH_SIMULADA', 'true')
+    vi.useFakeTimers()
+    try {
+      const usuario = await resolver(
+        ingresarConCorreo({ correo: CUENTA_DEMO.correo, contrasena: CUENTA_DEMO.contrasena }),
+      )
+      expect(usuario.via).toBe('correo')
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('con el flag en "false" el ingreso por correo rechaza aunque las credenciales sean las demo', async () => {
+    vi.stubEnv('VITE_AUTH_SIMULADA', 'false')
+    await expect(
+      ingresarConCorreo({ correo: CUENTA_DEMO.correo, contrasena: CUENTA_DEMO.contrasena }),
+    ).rejects.toBeInstanceOf(AutenticacionNoConfiguradaError)
+  })
+
+  it('con el flag en "false" los tres proveedores rechazan', async () => {
+    vi.stubEnv('VITE_AUTH_SIMULADA', 'false')
+    for (const proveedor of ['google', 'github', 'microsoft'] as const) {
+      await expect(ingresarConProveedor(proveedor)).rejects.toBeInstanceOf(
+        AutenticacionNoConfiguradaError,
+      )
+    }
+  })
+
+  it('sin definir el flag también rechaza', async () => {
+    vi.stubEnv('VITE_AUTH_SIMULADA', '')
+    await expect(ingresarConProveedor('google')).rejects.toBeInstanceOf(
+      AutenticacionNoConfiguradaError,
+    )
   })
 })

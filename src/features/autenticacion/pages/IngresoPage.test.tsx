@@ -58,6 +58,13 @@ describe('IngresoPage (I-1)', () => {
     vi.useRealTimers()
   })
 
+  describe('foco inicial (A21)', () => {
+    it('al montar, el foco queda en el h1 de la pantalla', () => {
+      renderizar()
+      expect(screen.getByRole('heading', { level: 1 })).toHaveFocus()
+    })
+  })
+
   describe('validación (H1-E2..E4)', () => {
     it('correo "maria.lopez@" muestra aviso de correo y no llama a la api', async () => {
       const { usuario } = renderizar()
@@ -121,6 +128,58 @@ describe('IngresoPage (I-1)', () => {
       await avanzar(1300)
       expect(await screen.findByText('Pantalla de bienvenida')).toBeInTheDocument()
       expect(router.state.location.pathname).toBe('/bienvenida')
+    })
+
+    it('tras el rechazo el foco vuelve al campo contraseña', async () => {
+      const { usuario } = renderizar()
+      await llenar(usuario, 'maria.lopez@agricolaandrea.com', 'Clave12345')
+      await usuario.click(botonIngresar())
+      await avanzar(1300)
+      expect(await screen.findByText('Correo o contraseña incorrectos')).toBeInTheDocument()
+      expect(screen.getByLabelText('Contraseña', { exact: true })).toHaveFocus()
+    })
+
+    it('el aviso se oculta al editar el correo y reaparece en el siguiente rechazo', async () => {
+      const { usuario } = renderizar()
+      await llenar(usuario, 'maria.lopez@agricolaandrea.com', 'Clave12345')
+      await usuario.click(botonIngresar())
+      await avanzar(1300)
+      expect(await screen.findByText('Correo o contraseña incorrectos')).toBeInTheDocument()
+
+      await usuario.type(screen.getByLabelText('Correo electrónico'), 'x')
+      expect(screen.queryByText('Correo o contraseña incorrectos')).not.toBeInTheDocument()
+
+      await usuario.click(botonIngresar())
+      await avanzar(1300)
+      expect(await screen.findByText('Correo o contraseña incorrectos')).toBeInTheDocument()
+    })
+
+    it('el aviso se oculta al editar la contraseña', async () => {
+      const { usuario } = renderizar()
+      await llenar(usuario, 'maria.lopez@agricolaandrea.com', 'Clave12345')
+      await usuario.click(botonIngresar())
+      await avanzar(1300)
+      expect(await screen.findByText('Correo o contraseña incorrectos')).toBeInTheDocument()
+
+      await usuario.type(screen.getByLabelText('Contraseña', { exact: true }), '6')
+      expect(screen.queryByText('Correo o contraseña incorrectos')).not.toBeInTheDocument()
+    })
+
+    it('editar un campo y luego fallar un ingreso por proveedor muestra el error', async () => {
+      const { usuario } = renderizar()
+      await llenar(usuario, 'maria.lopez@agricolaandrea.com', 'Clave12345')
+      await usuario.click(botonIngresar())
+      await avanzar(1300)
+      expect(await screen.findByText('Correo o contraseña incorrectos')).toBeInTheDocument()
+      await usuario.type(screen.getByLabelText('Correo electrónico'), 'x')
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+
+      const consola = vi.spyOn(console, 'error').mockImplementation(() => {})
+      vi.mocked(authApi.ingresarConProveedor).mockRejectedValueOnce(new Error('proveedor caído'))
+      await usuario.click(screen.getByRole('button', { name: /Continuar con Google/ }))
+      await avanzar(1300)
+      expect(await screen.findByRole('alert')).toBeInTheDocument()
+      consola.mockRestore()
     })
 
     it('seis rechazos seguidos siguen mostrando el mismo mensaje', async () => {

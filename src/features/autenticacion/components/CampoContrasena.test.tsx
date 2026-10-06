@@ -20,8 +20,12 @@ describe("CampoContrasena (U-7)", () => {
     await user.type(input, "Demo2026!")
 
     // Mostrar -> type=text con el valor legible
-    await user.click(screen.getByRole("button", { name: "Mostrar contraseña" }))
+    const botonMostrar = screen.getByRole("button", { name: "Mostrar contraseña" })
+    expect(botonMostrar).toHaveAttribute("title", "Mostrar contraseña")
+    await user.click(botonMostrar)
     expect(input).toHaveAttribute("type", "text")
+    const botonOcultar = screen.getByRole("button", { name: "Ocultar contraseña" })
+    expect(botonOcultar).toHaveAttribute("title", "Ocultar contraseña")
     expect(input).toHaveValue("Demo2026!")
 
     // Ocultar -> vuelve a password y conserva el valor
